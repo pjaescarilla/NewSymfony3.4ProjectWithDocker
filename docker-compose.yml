@@ -21,4 +21,4 @@ services:
     volumes_from:
       - app
     ports:
-      - "99:80"
+      - "${PORT_NUMBER}:80"
