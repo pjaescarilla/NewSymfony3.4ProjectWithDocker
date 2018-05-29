@@ -2,13 +2,13 @@ version: '2'
 
 services:
   db:
-    container_name: qa.mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
     image: mysql
     environment:
         MYSQL_ROOT_PASSWORD: root123  
         
   app:
-    container_name: qa.php
+    container_name: ${PHP_CONTAINER_NAME}
     build: .docker/php
     volumes:
       - .:/app
@@ -16,7 +16,7 @@ services:
       - ./var/cache.:/app/var/cache
 
   nginx:
-    container_name: qa.nginx
+    container_name: ${NGINX_CONTAINER_NAME}
     build: .docker/nginx
     volumes_from:
       - app
