@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  db:
+    container_name: qa.mysql
+    image: mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: root123  
+        
+  app:
+    container_name: qa.php
+    build: .docker/php
+    volumes:
+      - .:/app
+      - ./var/logs:/app/var/logs
+      - ./var/cache.:/app/var/cache
+
+  nginx:
+    container_name: qa.nginx
+    build: .docker/nginx
+    volumes_from:
+      - app
+    ports:
+      - "99:80"
